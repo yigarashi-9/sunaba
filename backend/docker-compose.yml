@@ -1,0 +1,16 @@
+version: '3'
+services:
+  mysql:
+    container_name: "mysql"
+    image: "mysql:8.0.32"
+    environment:
+      MYSQL_DATABASE: "sunaba"
+      MYSQL_USER: "readwrite"
+      MYSQL_PASSWORD: "readwrite"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "1"
+    ports:
+      - "3307:3306"
+    volumes:
+      - "./db/sunaba.sql:/docker-entrypoint-initdb.d/1.sql:ro,delegated"
+      - "./db/data.sql:/docker-entrypoint-initdb.d/2.sql:ro,delegated"
+      - "./docker/mysql:/etc/mysql/conf.d:ro,delegated"
